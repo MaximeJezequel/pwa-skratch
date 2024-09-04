@@ -6,6 +6,12 @@ const cardStore = useCardStore();
 const canvas = ref<HTMLCanvasElement | null>(null);
 const ctx = ref<CanvasRenderingContext2D | null>(null);
 
+// Variables for touch gesture detection
+let touchStartX = 0;
+let touchEndX = 0;
+const threshold = 50; // Minimum distance in pixels for a swipe to be considered
+const edgeThreshold = 30; // Distance from the edge to start detecting the swipe
+
 const initCanvas = () => {
     if (!canvas.value) return;
 
@@ -63,23 +69,54 @@ const handleDrawing = () => {
     return { drawStart, drawMove, drawEnd };
 };
 
+const handleTouchStart = (event: TouchEvent) => {
+    touchStartX = event.touches[0].clientX;
+};
+
+const handleTouchMove = (event: TouchEvent) => {
+    touchEndX = event.touches[0].clientX;
+};
+
+const handleTouchEnd = () => {
+    // Detect swipe direction
+    if (touchStartX < edgeThreshold && touchEndX - touchStartX > threshold) {
+        // Swipe right from the left edge (left-to-right swipe)
+        window.location.reload();
+    } else if (touchStartX > window.innerWidth - edgeThreshold && touchStartX - touchEndX > threshold) {
+        // Swipe left from the right edge (right-to-left swipe)
+        window.location.reload();
+    }
+};
+
 onMounted(() => {
     cardStore.setRandomCard();
     initCanvas();
 
     const { drawStart, drawMove, drawEnd } = handleDrawing();
 
-    // Attach event listeners
+    // Attach event listeners for drawing
     canvas.value?.addEventListener("touchstart", drawStart);
     canvas.value?.addEventListener("touchmove", drawMove);
     canvas.value?.addEventListener("touchend", drawEnd);
+
+    // Attach event listeners for swipe gestures
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("touchend", handleTouchEnd);
 });
 
 onUnmounted(() => {
     const { drawStart, drawMove, drawEnd } = handleDrawing();
+
+    // Remove event listeners for drawing
     canvas.value?.removeEventListener("touchstart", drawStart);
     canvas.value?.removeEventListener("touchmove", drawMove);
     canvas.value?.removeEventListener("touchend", drawEnd);
+
+    // Remove event listeners for swipe gestures
+    window.removeEventListener("touchstart", handleTouchStart);
+    window.removeEventListener("touchmove", handleTouchMove);
+    window.removeEventListener("touchend", handleTouchEnd);
 });
 </script>
 
@@ -99,6 +136,7 @@ body {
 #app {
     height: 100%;
     width: 100%;
+    background-color: #000;
 }
 .background {
     position: fixed;
