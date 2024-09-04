@@ -14,9 +14,9 @@ export default defineConfig({
     },
 
     manifest: {
-      name: 'SkratcheeZ',
-      short_name: 'SkratchMe',
-      description: 'skratch',
+      name: 'SkratchMe',
+      short_name: 'Skratch',
+      description: 'Skratch',
       theme_color: '#000000',
       background_color: '#000000',
       display: 'fullscreen',
