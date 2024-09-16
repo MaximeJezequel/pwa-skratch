@@ -9,7 +9,7 @@
         <div class="grid-item" @click="$emit('selectValue', '7')"></div>
         <div class="grid-item" @click="$emit('selectValue', '8')"></div>
         <div class="grid-item" @click="$emit('selectValue', '9')"></div>
-        <div class="grid-item" @click="$emit('selectValue', '10')"></div>
+        <div class="grid-item" @click="$emit('selectValue', '0')"></div>
         <div class="grid-item" @click="$emit('selectValue', 'J')"></div>
         <div class="grid-item" @click="$emit('selectValue', 'Q')"></div>
         <div class="grid-item" @click="$emit('selectValue', 'K')"></div>
