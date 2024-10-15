@@ -1,18 +1,12 @@
 <template>
     <div class="select-value">
-        <div class="grid-item" @click="$emit('selectValue', 'A')" @touchstart="$emit('selectValue', 'A')"></div>
-        <div class="grid-item" @click="$emit('selectValue', '2')" @touchstart="$emit('selectValue', '2')"></div>
-        <div class="grid-item" @click="$emit('selectValue', '3')" @touchstart="$emit('selectValue', '3')"></div>
-        <div class="grid-item" @click="$emit('selectValue', '4')" @touchstart="$emit('selectValue', '4')"></div>
-        <div class="grid-item" @click="$emit('selectValue', '5')" @touchstart="$emit('selectValue', '5')"></div>
-        <div class="grid-item" @click="$emit('selectValue', '6')" @touchstart="$emit('selectValue', '6')"></div>
-        <div class="grid-item" @click="$emit('selectValue', '7')" @touchstart="$emit('selectValue', '7')"></div>
-        <div class="grid-item" @click="$emit('selectValue', '8')" @touchstart="$emit('selectValue', '8')"></div>
-        <div class="grid-item" @click="$emit('selectValue', '9')" @touchstart="$emit('selectValue', '9')"></div>
-        <div class="grid-item" @click="$emit('selectValue', '0')" @touchstart="$emit('selectValue', '0')"></div>
-        <div class="grid-item" @click="$emit('selectValue', 'J')" @touchstart="$emit('selectValue', 'J')"></div>
-        <div class="grid-item" @click="$emit('selectValue', 'Q')" @touchstart="$emit('selectValue', 'Q')"></div>
-        <div class="grid-item" @click="$emit('selectValue', 'K')" @touchstart="$emit('selectValue', 'K')"></div>
+        <div
+            v-for="value in ['A', '2', '3', '4', '5', '6', '7', '8', '9', '0', 'J', 'Q', 'K']"
+            :key="value"
+            class="grid-item"
+            @click.prevent="$emit('selectValue', value)"
+            @touchstart.prevent="$emit('selectValue', value)"
+        ></div>
     </div>
 </template>
 

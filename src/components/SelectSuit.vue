@@ -1,9 +1,6 @@
 <template>
     <div class="select-suit">
-        <div class="grid-item" @click="$emit('selectSuit', 'S')" @touchstart="$emit('selectSuit', 'S')"></div>
-        <div class="grid-item" @click="$emit('selectSuit', 'H')" @touchstart="$emit('selectSuit', 'H')"></div>
-        <div class="grid-item" @click="$emit('selectSuit', 'D')" @touchstart="$emit('selectSuit', 'D')"></div>
-        <div class="grid-item" @click="$emit('selectSuit', 'C')" @touchstart="$emit('selectSuit', 'C')"></div>
+        <div v-for="suit in ['S', 'H', 'D', 'C']" :key="suit" class="grid-item" @click.prevent="$emit('selectSuit', suit)" @touchstart.prevent="$emit('selectSuit', suit)"></div>
     </div>
 </template>
 
