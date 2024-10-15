@@ -19,8 +19,7 @@ export default defineConfig({
                 name: " ",
                 short_name: "Skratch",
                 description: "Skratch",
-                theme_color: "#000000",
-                background_color: "#000000",
+                background_color: "transparent",
                 display: "fullscreen",
                 orientation: "portrait",
                 icons: [
